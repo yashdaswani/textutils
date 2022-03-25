@@ -22,6 +22,7 @@ export default function Textform(props) {
         var text = document.getElementById("myBox");
         text.select();
         navigator.clipboard.writeText(text.value);
+        document.getSelection().removeAllRange();
     }
 
     const handleclear=()=>{
@@ -105,23 +106,23 @@ export default function Textform(props) {
       <>
       <div className="my-3" style={{color: props.mode==='dark'?'white':'black'}}>
       <h2>{props.heading} </h2>
-      <textarea className="form-control" value={text} onChange={handleonchange} style={{backgroundColor: props.mode==='dark'?'grey':'white', color: props.mode==='dark'?'white':'black'}} id="myBox" rows="8"></textarea>
+      <textarea className="form-control"    value={text} onChange={handleonchange} style={{backgroundColor: props.mode==='dark'?'#626770':'white', color: props.mode==='dark'?'white':'black'}} id="myBox" rows="8"></textarea>
       </div>
-      <button className='btn btn-primary mx-2 my-1' onClick={handleupclick}>Convert To Uppercase</button>
-      <button className='btn btn-primary mx-2' onClick={handlelowclick}>Convert To Lowercase</button>
-      <button className='btn btn-primary mx-2' onClick={handleclear}>Clear Text </button>
-      <button className='btn btn-primary mx-2' onClick={handlecopy}>Copy To Clipboard</button>
-      <button className='btn btn-primary mx-2' onClick={handlespaces}>Remove Extra Spaces</button>
-      <button className='btn btn-primary mx-2' onClick={handleCapitalize}>Capitalize</button>
+      <button className='btn btn-primary mx-2 my-1' disabled={text.length===0} onClick={handleupclick}>Convert To Uppercase</button>
+      <button className='btn btn-primary mx-2' disabled={text.length===0} onClick={handlelowclick}>Convert To Lowercase</button>
+      <button className='btn btn-primary mx-2' disabled={text.length===0} onClick={handleclear}>Clear Text </button>
+      <button className='btn btn-primary mx-2' disabled={text.length===0} onClick={handlecopy}>Copy To Clipboard</button>
+      <button className='btn btn-primary mx-2' disabled={text.length===0} onClick={handlespaces}>Remove Extra Spaces</button>
+      <button className='btn btn-primary mx-2'  disabled={text.length===0}onClick={handleCapitalize}>Capitalize</button>
       {/* <button className='btn btn-primary mx-2' onClick={handleInverse}>Inverse</button> */}
-      <button className='btn btn-primary mx-2' onClick={handletextExtract}>Remove All Symbols</button>
-      <button className='btn btn-primary mx-2 my-2' onClick={handleReverse}>Reverse</button>
-      <button className='btn btn-primary mx-2 my-2' onClick={DownloadText}>DownLoadFile</button>
+      <button className='btn btn-primary mx-2' disabled={text.length===0} onClick={handletextExtract}>Remove All Symbols</button>
+      <button className='btn btn-primary mx-2 my-2' disabled={text.length===0} onClick={handleReverse}>Reverse</button>
+      <button className='btn btn-primary mx-2 my-2' disabled={text.length===0} onClick={DownloadText}>DownLoadFile</button>
 
       <div className="my-3" style={{color: props.mode==='dark'?'white':'black'}}>
           <h2>Text Summary</h2>
-          <div>{text.split(" ").length} words and {text.length} characters</div>
-          <div>{0.008*text.split(" ").length} Minutes read</div>
+          <div>{text.split(" ").filter((element)=>{return element.length!==0}).length} words and {text.length} characters</div>
+          <div>{0.008*text.split(" ").filter((element)=>{return element.length!==0}).length} Minutes read</div>
           <h2 className="my-2">Preview</h2>
           <p>{text.length>0?text:"Enter something in the textbox above to preview it here"}</p>
       </div>
