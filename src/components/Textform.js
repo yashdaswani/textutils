@@ -39,19 +39,19 @@ export default function Textform(props) {
         setText(mytext);
     }
 
-    const handleInverse=()=>{
-        for(let i=0;i<text.length;i++)
-        {
-            if(text[i]===text[i].toUpperCase)
-            {
-                text[i]=text[i].toLowerCase;
-            }
-            else{
-                text[i]=text[i].toUpperCase;
-            }
-        }
-        setText(text);
-    }
+    // const handleInverse=()=>{
+    //     for(let i=0;i<text.length;i++)
+    //     {
+    //         if(text[i]===text[i].toUpperCase)
+    //         {
+    //             text[i]=text[i].toLowerCase;
+    //         }
+    //         else{
+    //             text[i]=text[i].toUpperCase;
+    //         }
+    //     }
+    //     setText(text);
+    // }
     //remove all the symbols
     const handletextExtract =()=>{
     const regex = /[0-9/A-Z/a-z/ /]/g;
@@ -101,7 +101,7 @@ export default function Textform(props) {
       };
 
     
-    const[text,setText]=useState("Enter the text")
+    const[text,setText]=useState("")
   return (
       <>
       <div className="my-3" style={{color: props.mode==='dark'?'white':'black'}}>
